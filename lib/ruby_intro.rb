@@ -17,32 +17,55 @@ def max_2_sum arr
   twoBiggest.inject(0) {|sum, n| sum + n}
 end
 
+# #recusive version
+# def sum_to_n? arr, n
+#   # YOUR CODE HERE
+#   # aka 2SUM problem
+#   # returns true if any 2 elements of array arr
+#   # sum to n.
+#   # check sum of beginning and end elements of sorted array,
+#   # and work in as appropriate
+#   return false if arr.count < 2  # don't have 2 elements to sum
+#   first = 0
+#   last = arr.count - 1
+#   arr.sort!
+#   return sum_to_n_rec arr, first, last, n
+# end
+#
+# def sum_to_n_rec arr, first, last, n
+#   return false if (first >= last)
+#   sum = arr[first] + arr[last]
+#   return true if (n == sum)
+#   if sum > n
+#     last -= 1
+#   else
+#     first += 1
+#   end
+#   return sum_to_n_rec arr, first, last, n
+# end
+
+# iterative version
 def sum_to_n? arr, n
-  # YOUR CODE HERE
   # aka 2SUM problem
   # returns true if any 2 elements of array arr
   # sum to n.
   # check sum of beginning and end elements of sorted array,
   # and work in as appropriate
-  return false if arr.count < 2  # can't sum 2 elements
+  return false if arr.count < 2  # don't have 2 elements to sum
+  arr.sort!
   first = 0
   last = arr.count - 1
-  arr.sort!
-  return sum_to_n_rec arr, first, last, n
+  while (first < last)
+    sum = arr[first] + arr[last]
+    return true if (sum == n)
+    if sum > n
+      last -= 1
+    else
+      first += 1
+    end # if block
+  end   # while loop
+  return false  # here if no match
 end
-
-def sum_to_n_rec arr, first, last, n
-  return false if (first >= last)
-  sum = arr[first] + arr[last]
-  return true if (n == sum)
-  if sum > n
-    last -= 1
-  else
-    first += 1
-  end
-  return sum_to_n_rec arr, first, last, n
-end
-
 # Part 2
 
 def hello(name)
@@ -68,9 +91,9 @@ def binary_multiple_of_4? s
   # regex to see if all characters of s = "0" or "1"
   return false if [] != s.scan(/[^01]/)
   # check if it's a multiple of 4
-  last = s.length
-  return false if last < 3  # already checked 0 and 00
-  return ("0" == s[last - 1]) && ("0" == s[last - 2])
+  len = s.length
+  return false if len < 3  # already checked 0 and 00
+  return ("0" == s[len - 1]) && ("0" == s[len - 2])
 end
 
 # Part 3
