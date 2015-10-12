@@ -26,22 +26,22 @@ def sum_to_n? arr, n
   # check sum of beginning and end elements of sorted array,
   # and work in as appropriate
   arr.sort!
-  return sum_to_n_rec arr, n
+  return sum_to_n_rec? arr, n
 end
 
-def sum_to_n_rec arr, n
+def sum_to_n_rec? arr, n
   len = arr.count
   return false if (len < 2)     # don't have 2 elements to sum
   first = 0
   last = len - 1
   sum = arr[first] + arr[last]
-  return true if (n == sum)
+  return true if (n == sum)     # found match
   if sum > n
-    last -= 1
+    last -= 1                   # bigger - discard largest element
   else
-    first += 1
+    first += 1                  # smaller - discard smallest element
   end
-  return sum_to_n_rec arr[first .. last], n
+  return sum_to_n_rec? arr[first .. last], n   # and try again
 end
 
 # # iterative version
