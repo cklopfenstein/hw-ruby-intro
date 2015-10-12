@@ -17,55 +17,55 @@ def max_2_sum arr
   twoBiggest.inject(0) {|sum, n| sum + n}
 end
 
-# #recusive version
+#recursive version
+def sum_to_n? arr, n
+  # YOUR CODE HERE
+  # aka 2SUM problem
+  # returns true if any 2 elements of array arr
+  # sum to n.
+  # check sum of beginning and end elements of sorted array,
+  # and work in as appropriate
+  arr.sort!
+  return sum_to_n_rec arr, n
+end
+
+def sum_to_n_rec arr, n
+  len = arr.count
+  return false if (len < 2)     # don't have 2 elements to sum
+  first = 0
+  last = len - 1
+  sum = arr[first] + arr[last]
+  return true if (n == sum)
+  if sum > n
+    last -= 1
+  else
+    first += 1
+  end
+  return sum_to_n_rec arr[first .. last], n
+end
+
+# # iterative version
 # def sum_to_n? arr, n
-#   # YOUR CODE HERE
 #   # aka 2SUM problem
 #   # returns true if any 2 elements of array arr
 #   # sum to n.
 #   # check sum of beginning and end elements of sorted array,
 #   # and work in as appropriate
 #   return false if arr.count < 2  # don't have 2 elements to sum
+#   arr.sort!
 #   first = 0
 #   last = arr.count - 1
-#   arr.sort!
-#   return sum_to_n_rec arr, first, last, n
+#   while (first < last)
+#     sum = arr[first] + arr[last]
+#     return true if (sum == n)
+#     if sum > n
+#       last -= 1
+#     else
+#       first += 1
+#     end # if block
+#   end   # while loop
+#   return false  # here if no match
 # end
-#
-# def sum_to_n_rec arr, first, last, n
-#   return false if (first >= last)
-#   sum = arr[first] + arr[last]
-#   return true if (n == sum)
-#   if sum > n
-#     last -= 1
-#   else
-#     first += 1
-#   end
-#   return sum_to_n_rec arr, first, last, n
-# end
-
-# iterative version
-def sum_to_n? arr, n
-  # aka 2SUM problem
-  # returns true if any 2 elements of array arr
-  # sum to n.
-  # check sum of beginning and end elements of sorted array,
-  # and work in as appropriate
-  return false if arr.count < 2  # don't have 2 elements to sum
-  arr.sort!
-  first = 0
-  last = arr.count - 1
-  while (first < last)
-    sum = arr[first] + arr[last]
-    return true if (sum == n)
-    if sum > n
-      last -= 1
-    else
-      first += 1
-    end # if block
-  end   # while loop
-  return false  # here if no match
-end
 # Part 2
 
 def hello(name)
